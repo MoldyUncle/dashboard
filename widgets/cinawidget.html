@@ -1,0 +1,97 @@
+<div class="cina-widget">
+    <div class="chinese"></div>
+    <div class="czech"></div>
+
+    <script>
+setTimeout(() => {
+    // vezme právě vložený wrapper widgetu
+    const root = document.querySelector(".cina-widget:last-of-type");
+    if (!root) return;
+
+    const cnEl = root.querySelector(".chinese");
+    const czEl = root.querySelector(".czech");
+    if (!cnEl || !czEl) return;
+
+    const quotes = [
+        // pozitivní
+        { cn: "一步一步来", cz: "Jdi krok za krokem.", type: "positive" },
+        { cn: "相信自己", cz: "Věř si.", type: "positive" },
+        { cn: "慢慢来，一切都会好的", cz: "Nespěchej, všechno bude v pořádku.", type: "positive" },
+        { cn: "你已经足够了", cz: "Už teď jsi dost.", type: "positive" },
+        { cn: "每天都在进步", cz: "Každý den se zlepšuješ.", type: "positive" },
+        { cn: "你总能赢游戏", cz: "Vždycky dokážeš vyhrát ve hře.", type: "positive" },
+        { cn: "朋友都在线支持你", cz: "Tví kamarádi jsou online a podporují tě.", type: "positive" },
+        { cn: "你是高手", cz: "Jsi skutečný profík.", type: "positive" },
+        { cn: "你的皮肤很酷", cz: "Tvůj skin je super.", type: "positive" },
+        { cn: "你的队伍总是获胜", cz: "Tvůj tým vždycky vyhrává.", type: "positive" },
+        { cn: "大家都想和你玩", cz: "Každý s tebou chce hrát.", type: "positive" },
+
+        // negativní (gaming styl)
+        { cn: "你没有Roblox女朋友", cz: "Nemáš holku v Robloxu.", type: "negative" },
+        { cn: "你在Fortnite很糟", cz: "Jsi špatný ve Fortnitu.", type: "negative" },
+        { cn: "你永远不会赢游戏", cz: "Nikdy nevyhraješ ve hře.", type: "negative" },
+        { cn: "没有朋友在线", cz: "Nemáš online žádné kamarády.", type: "negative" },
+        { cn: "你太菜了", cz: "Jsi úplně noob.", type: "negative" },
+        { cn: "你的皮肤很丑", cz: "Tvůj skin je ošklivý.", type: "negative" },
+        { cn: "你的队伍总是输", cz: "Tvůj tým vždycky prohraje.", type: "negative" },
+        { cn: "你连教程都做不好", cz: "Ani tutoriál nezvládneš.", type: "negative" },
+        { cn: "没人想和你玩", cz: "Nikdo s tebou nechce hrát.", type: "negative" },
+        { cn: "你总是被踢出游戏", cz: "Vždycky tě vyhodí ze hry.", type: "negative" }
+    ];
+
+    const random = quotes[Math.floor(Math.random() * quotes.length)];
+    cnEl.textContent = random.cn;
+    czEl.textContent = random.cz;
+
+    // barevné třídy
+    cnEl.className = "chinese " + (random.type || "positive");
+    czEl.className = "czech " + (random.type || "positive");
+}, 0);
+    </script>
+</div>
+
+<style>
+.cina-widget {
+    padding: 24px 32px;
+    border-radius: 20px;
+    background: #fffdf8;
+    box-shadow: 0 10px 28px rgba(0,0,0,0.12);
+    text-align: center;
+    animation: fadeInSlow 2.5s ease forwards;
+}
+
+.cina-widget .chinese {
+    font-size: 50px;
+    font-family: "Papyrus", "KaiTi", "STKaiti", serif;
+    margin-bottom: 8px;
+}
+
+.cina-widget .czech {
+    font-size: 12px;
+    font-family: "Arial Black", "Verdana", sans-serif;
+    letter-spacing: 0.14em;
+    opacity: 0.75;
+}
+
+/* barevné stylování podle typu věty */
+.cina-widget .chinese.positive,
+.cina-widget .czech.positive {
+    color: #3cb371; /* světle zelená */
+}
+
+.cina-widget .chinese.negative,
+.cina-widget .czech.negative {
+    color: #e63946; /* rudá / červená */
+}
+
+@keyframes fadeInSlow {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+</style>
