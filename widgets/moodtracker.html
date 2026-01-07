@@ -1,0 +1,193 @@
+<div class="mood-widget">
+    <h3>Jak se dnes cítíš?</h3>
+
+    <input type="date" class="date-picker">
+
+    <div class="moods">
+        <button data-mood="😄">😄</button>
+        <button data-mood="🙂">🙂</button>
+        <button data-mood="😐">😐</button>
+        <button data-mood="😕">😕</button>
+        <button data-mood="😡">😡</button>
+    </div>
+
+    <div class="history">
+        <h4>Posledních 7 dní</h4>
+        <ul></ul>
+    </div>
+
+    <script>
+setTimeout(() => {
+    const root = document.querySelector(".mood-widget:last-of-type");
+    if (!root) return;
+
+    const dateInput = root.querySelector(".date-picker");
+    const buttons = root.querySelectorAll(".moods button");
+    const historyList = root.querySelector(".history ul");
+
+    const moodColors = {
+        "😄": "happy",
+        "🙂": "good",
+        "😐": "neutral",
+        "😕": "bad",
+        "😡": "angry"
+    };
+
+    const today = new Date().toISOString().split("T")[0];
+    dateInput.value = today;
+
+    const loadData = () =>
+        JSON.parse(localStorage.getItem("mood-tracker") || "{}");
+
+    const saveData = (data) =>
+        localStorage.setItem("mood-tracker", JSON.stringify(data));
+
+    const renderHistory = () => {
+        historyList.innerHTML = "";
+        const data = loadData();
+        const dates = Object.keys(data).sort().reverse().slice(0, 7);
+
+        dates.forEach(date => {
+            const mood = data[date];
+            const li = document.createElement("li");
+            li.textContent = `${date}: ${mood}`;
+            li.classList.add("mood-text", moodColors[mood]);
+            historyList.appendChild(li);
+        });
+    };
+
+    buttons.forEach(btn => {
+        btn.addEventListener("click", () => {
+            const mood = btn.dataset.mood;
+            const date = dateInput.value;
+            if (!date) return;
+
+            const data = loadData();
+            data[date] = mood; // jen jedna nálada na den
+            saveData(data);
+            renderHistory();
+        });
+    });
+
+    renderHistory();
+}, 0);
+</script>
+</div>
+
+<style>
+
+    .moods button {
+    position: relative;
+    font-size: 26px;
+    background: transparent;
+    border: none;
+    border-radius: 12px;
+    padding: 8px 12px;
+    cursor: pointer;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.moods button::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 12px;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    z-index: -1;
+}
+
+.moods button:hover::before {
+    opacity: 0.85;
+}
+
+.moods button[data-mood="😄"]::before { background: #1faa59; }
+.moods button[data-mood="🙂"]::before { background: #7bc96f; }
+.moods button[data-mood="😐"]::before { background: #f1c40f; }
+.moods button[data-mood="😕"]::before { background: #e67e22; }
+.moods button[data-mood="😡"]::before { background: #e74c3c; }
+
+.moods button:hover {
+    transform: scale(1.15);
+    transition: transform 0.2s ease;
+}
+
+.mood-text {
+    font-weight: bold;
+}
+.mood-text.happy { color: #1faa59; }
+.mood-text.good { color: #7bc96f; }
+.mood-text.neutral { color: #f1c40f; }
+.mood-text.bad { color: #e67e22; }
+.mood-text.angry { color: #e74c3c; }
+
+.moods button[data-mood="😄"] { background: #e8f8ef; }
+.moods button[data-mood="🙂"] { background: #f0faec; }
+.moods button[data-mood="😐"] { background: #fff8e1; }
+.moods button[data-mood="😕"] { background: #fdebd0; }
+.moods button[data-mood="😡"] { background: #fdecea; }
+
+.mood-widget {
+    padding: 20px;
+    border-radius: 18px;
+    background: #ffffff;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    text-align: center;
+    animation: fadeIn 1.5s ease forwards;
+}
+
+.mood-widget h3 {
+    margin-bottom: 10px;
+}
+
+.date-picker {
+    margin-bottom: 14px;
+    padding: 6px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+.moods {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.moods button {
+    font-size: 26px;
+    background: #f3f3f3;
+    border: none;
+    border-radius: 10px;
+    padding: 6px 10px;
+    cursor: pointer;
+    transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.moods button:hover {
+    transform: scale(1.2);
+    background: #e0e0e0;
+}
+
+.history h4 {
+    margin-bottom: 6px;
+    font-size: 14px;
+}
+
+.history ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 13px;
+}
+
+.history li {
+    margin-bottom: 4px;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+</style>
