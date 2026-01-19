@@ -1,0 +1,7 @@
+:root{
+    --body-bg: linear-gradient(90deg,rgba(255, 247, 0, 1) 35%, rgba(242, 218, 167, 1) 100%);;
+    --widget-bg: #eeee42;
+    --text-color: #c5a7a7;
+    --primary-color: #8b82f6;
+    --primary-color-text: #ffffff;
+}

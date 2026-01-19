@@ -4,7 +4,7 @@
 
     <script>
 setTimeout(() => {
-    // vezme právě vložený wrapper widgetu
+
     const root = document.querySelector(".cina-widget:last-of-type");
     if (!root) return;
 
@@ -13,7 +13,6 @@ setTimeout(() => {
     if (!cnEl || !czEl) return;
 
     const quotes = [
-        // pozitivní
         { cn: "一步一步来", cz: "Jdi krok za krokem.", type: "positive" },
         { cn: "相信自己", cz: "Věř si.", type: "positive" },
         { cn: "慢慢来，一切都会好的", cz: "Nespěchej, všechno bude v pořádku.", type: "positive" },
@@ -26,7 +25,6 @@ setTimeout(() => {
         { cn: "你的队伍总是获胜", cz: "Tvůj tým vždycky vyhrává.", type: "positive" },
         { cn: "大家都想和你玩", cz: "Každý s tebou chce hrát.", type: "positive" },
 
-        // negativní (gaming styl)
         { cn: "你没有Roblox女朋友", cz: "Nemáš holku v Robloxu.", type: "negative" },
         { cn: "你在Fortnite很糟", cz: "Jsi špatný ve Fortnitu.", type: "negative" },
         { cn: "你永远不会赢游戏", cz: "Nikdy nevyhraješ ve hře.", type: "negative" },
@@ -43,7 +41,6 @@ setTimeout(() => {
     cnEl.textContent = random.cn;
     czEl.textContent = random.cz;
 
-    // barevné třídy
     cnEl.className = "chinese " + (random.type || "positive");
     czEl.className = "czech " + (random.type || "positive");
 }, 0);
@@ -54,8 +51,6 @@ setTimeout(() => {
 .cina-widget {
     padding: 24px 32px;
     border-radius: 20px;
-    background: #ffffff;
-    box-shadow: 0 10px 28px rgba(0,0,0,0.12);
     text-align: center;
     animation: fadeInSlow 2.5s ease forwards;
 }
@@ -73,15 +68,14 @@ setTimeout(() => {
     opacity: 0.75;
 }
 
-/* barevné stylování podle typu věty */
 .cina-widget .chinese.positive,
 .cina-widget .czech.positive {
-    color: #3cb371; /* světle zelená */
+    color: #3cb371;
 }
 
 .cina-widget .chinese.negative,
 .cina-widget .czech.negative {
-    color: #e63946; /* rudá / červená */
+    color: #e63946;
 }
 
 @keyframes fadeInSlow {

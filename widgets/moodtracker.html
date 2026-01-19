@@ -1,5 +1,4 @@
 <div class="mood-widget">
-    <h3>Jak se dnes cítíš?</h3>
 
     <input type="date" class="date-picker">
 
@@ -80,12 +79,9 @@ setTimeout(() => {
     position: relative;
     font-size: 26px;
     background: transparent;
-    border: none;
     border-radius: 12px;
     padding: 8px 12px;
     cursor: pointer;
-    overflow: hidden;
-    z-index: 1;
 }
 
 .moods button::before {
@@ -131,8 +127,8 @@ setTimeout(() => {
 .mood-widget {
     padding: 20px;
     border-radius: 18px;
-    background: #ffffff;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    background: var(--widget-bg);
+    box-shadow: 0 8px 24px var(--shadow-color);
     text-align: center;
     animation: fadeIn 1.5s ease forwards;
 }
@@ -145,7 +141,6 @@ setTimeout(() => {
     margin-bottom: 14px;
     padding: 6px;
     border-radius: 8px;
-    border: 1px solid #ccc;
 }
 
 .moods {
@@ -157,8 +152,7 @@ setTimeout(() => {
 
 .moods button {
     font-size: 26px;
-    background: #f3f3f3;
-    border: none;
+    background: var(--widget-bg);
     border-radius: 10px;
     padding: 6px 10px;
     cursor: pointer;
@@ -167,7 +161,7 @@ setTimeout(() => {
 
 .moods button:hover {
     transform: scale(1.2);
-    background: #e0e0e0;
+    background: var(--widget-bg-hover);
 }
 
 .history h4 {
